@@ -1,20 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import joblib
-# Import your custom classes
 from src.preprocess import PREPROCESSING
 from src.predictor import PREDICTOR
+from src.llm_engine import CustomerData,CreditLLMEngine
+
+LLM_ENGINE = CreditLLMEngine()
 
 app = Flask(__name__)
 
-# Mock function for LLM - Replace this with your actual LLM call (OpenAI, Gemini, etc.)
-def get_llm_analysis(user_data, ml_result):
-    """
-    Generates a natural language explanation of the risk.
-    """
-    risk_status = "Low Risk" if ml_result == 1 else "High Risk"
-    return f"Based on the applicant's profile (Age: {user_data['Age']}, Credit: {user_data['Credit amount']}), " \
-           f"the system classifies this as {risk_status}. The credit amount relative to duration " \
-           f"is a key factor in this decision."
 
 @app.route('/')
 def index():
@@ -34,8 +27,17 @@ def predict():
         predictor = PREDICTOR(processed_data)
         ml_prediction = int(predictor.run()[0]) # Convert numpy int to Python int
         
+        
         # 4. Get LLM Analysis
-        llm_text = get_llm_analysis(user_input, ml_prediction)
+#         example_row = {
+# #         "Age": 33, "Job": 2, "Housing": "own", 
+# #         "Saving accounts": "little", "Checking account": "moderate",
+# #         "Credit amount": 1169, "Duration": 6, "Purpose": "radio/TV", "Risk": "good"
+# #     }
+
+# #     # Create Pydantic model from dict
+# #     customer = CustomerData(**example_row)
+        llm_text = LLM_ENGINE.get_description(customer)
         
         return jsonify({
             'ml_output': "Low Risk" if ml_prediction == 1 else "High Risk",
