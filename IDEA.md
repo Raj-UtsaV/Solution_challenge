@@ -190,3 +190,34 @@ AI Fairness Auditor for Banking ensures that automated financial decisions are n
 ## 📌 Project Tagline
 
 > *“Fair Loans, Fair Lives – Building Trustworthy AI in Banking.”*
+
+
+
+project-root/
+│
+├── data/
+│   ├── raw/                # Original, immutable data
+│   └── processed/          # Data after encoding and scaling
+│
+├── models/
+│   ├── scaler.pkl          # Saved StandardScaler/MinMaxScaler
+│   ├── encoder.pkl         # Saved OneHotEncoder/LabelEncoder
+│   └── ml_model.pkl        # Your trained ML model (e.g., XGBoost, Random Forest)
+│
+├── notebooks/              # Jupyter notebooks for EDA and training
+│   ├── 01_exploration.ipynb
+│   └── 02_model_training.ipynb
+│
+├── src/
+│   ├── __init__.py
+│   ├── preprocess.py       # Logic for encoding and scaling
+│   ├── predictor.py        # Logic for ML model inference
+│   ├── llm_engine.py       # Logic for LLM prompting and description generation
+│   └── utils.py            # Helper functions (logging, loading files)
+│
+├── templates/              # Prompt templates for the LLM
+│   └── prompt_v1.txt
+│
+├── app.py                  # Main entry point (e.g., Streamlit or FastAPI)
+├── requirements.txt        # Project dependencies
+└── .env                    # API keys (OpenAI, Anthropic, etc.)
