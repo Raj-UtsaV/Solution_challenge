@@ -2,7 +2,9 @@ import os
 from typing import Optional
 from openai import OpenAI
 from pydantic import BaseModel, Field
-import config
+from config import paths_config
+from dotenv import load_dotenv
+load_dotenv()
 
 # 1. Define the Data Schema
 class CustomerData(BaseModel):
@@ -36,9 +38,9 @@ class CreditLLMEngine:
         Priority: Argument > Environment Variable > Config File
         """
         # Resolve values dynamically
-        self.model = model or os.getenv("MODEL_NAME") or config.LLM_MODEL
-        final_url = base_url or os.getenv("BASE_URL") or config.BASE_URL
-        final_key = api_key or os.getenv("API_KEY") or config.API_KEY
+        self.model = model or os.getenv("MODEL_NAME") or paths_config.LLM_MODEL
+        final_url = base_url or os.getenv("BASE_URL") or paths_config.BASE_URL
+        final_key = api_key or os.getenv("API_KEY") or paths_config.API_KEY
 
         self.client = OpenAI(
             base_url=final_url,
@@ -103,21 +105,21 @@ class CreditLLMEngine:
             print(f"DEBUG: LLM Inference failed: {e}") 
             return f"I'm sorry, I couldn't generate an explanation right now. (Error: {str(e)})"
 
-# --- Usage Example (How to call this in your main app) ---
+# # --- Usage Example (How to call this in your main app) ---
 # if __name__ == "__main__":
 #     # Initialize (will use env vars or defaults automatically)
 #     engine = CreditLLMEngine()
-#
+
 #     # Example dictionary (mocking a row from your df)
 #     example_row = {
 #         "Age": 33, "Job": 2, "Housing": "own", 
 #         "Saving accounts": "little", "Checking account": "moderate",
 #         "Credit amount": 1169, "Duration": 6, "Purpose": "radio/TV", "Risk": "good"
 #     }
-#
+
 #     # Create Pydantic model from dict
 #     customer = CustomerData(**example_row)
-#
+
 #     # Get results
 #     text = engine.get_description(customer)
 #     print(text)
