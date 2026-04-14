@@ -2,6 +2,7 @@ import os
 from typing import Optional
 from openai import OpenAI
 from pydantic import BaseModel, Field
+import config
 
 # 1. Define the Data Schema
 class CustomerData(BaseModel):
@@ -29,19 +30,15 @@ class RiskExplanation(BaseModel):
 
 # 2. Define the LLM Engine Class
 class CreditLLMEngine:
-    def __init__(self, api_key: str = None, model: str = None, base_url: str = None):
+    def __init__(self, model: str = None, base_url: str = None, api_key: str = None):
         """
-        Prioritizes: 1. Passed arguments -> 2. Environment Variables -> 3. Hardcoded Defaults
+        The code logic stays here, but the values come from config.py.
+        Priority: Argument > Environment Variable > Config File
         """
-        # Hardcoded Defaults (Fallback)
-        DEFAULT_MODEL = "openai/gpt-oss-120b"
-        DEFAULT_URL = "https://api.groq.com/openai/v1"
-        DEFAULT_KEY = "your-default-key-if-needed" 
-
-        # Resolution Logic
-        self.model = model or os.getenv("MODEL_NAME") or DEFAULT_MODEL
-        final_url = base_url or os.getenv("BASE_URL") or DEFAULT_URL
-        final_key = api_key or os.getenv("API_KEY") or DEFAULT_KEY
+        # Resolve values dynamically
+        self.model = model or os.getenv("MODEL_NAME") or config.LLM_MODEL
+        final_url = base_url or os.getenv("BASE_URL") or config.BASE_URL
+        final_key = api_key or os.getenv("API_KEY") or config.API_KEY
 
         self.client = OpenAI(
             base_url=final_url,
