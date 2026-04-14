@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Analysis App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Risk Prediction System</h1>
+            <p>Fill in the details to evaluate credit risk</p>
+        </header>
+
+        <form id="riskForm">
+            <div class="input-grid">
+                <div class="field">
+                    <label>Age</label>
+                    <input type="number" name="Age" value="25" required>
+                </div>
+                <div class="field">
+                    <label>Sex</label>
+                    <select name="Sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Job Level</label>
+                    <input type="number" name="Job" value="2" min="0" max="3">
+                </div>
+                <div class="field">
+                    <label>Housing</label>
+                    <select name="Housing">
+                        <option value="own">Own</option>
+                        <option value="rent">Rent</option>
+                        <option value="free">Free</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Saving Accounts</label>
+                    <select name="Saving accounts">
+                        <option value="little">Little</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="rich">Rich</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Checking Account</label>
+                    <select name="Checking account">
+                        <option value="little">Little</option>
+                        <option value="moderate">Moderate</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Credit Amount</label>
+                    <input type="number" name="Credit amount" value="1500">
+                </div>
+                <div class="field">
+                    <label>Duration (Months)</label>
+                    <input type="number" name="Duration" value="12">
+                </div>
+                <div class="field">
+                    <label>Purpose</label>
+                    <input type="text" name="Purpose" value="radio/TV">
+                </div>
+            </div>
+            <button type="submit" class="predict-btn">Analyze Risk</button>
+        </form>
+
+        <div class="results-container">
+            <div class="result-card">
+                <h3>Machine Learning Result</h3>
+                <div id="mlResult" class="output-box">—</div>
+            </div>
+            <div class="result-card">
+                <h3>LLM Reasoning</h3>
+                <div id="llmResult" class="output-box">—</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('riskForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Show loading state
+            document.getElementById('mlResult').innerText = "Processing...";
+            document.getElementById('llmResult').innerText = "Analyzing...";
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if(result.status === 'success') {
+                document.getElementById('mlResult').innerText = result.ml_output;
+                document.getElementById('llmResult').innerText = result.llm_output;
+            } else {
+                alert("Error: " + result.message);
+            }
+        };
+    </script>
+</body>
+</html>
