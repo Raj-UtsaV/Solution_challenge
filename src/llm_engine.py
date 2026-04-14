@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 from openai import OpenAI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from config import paths_config
 from dotenv import load_dotenv
 load_dotenv()
@@ -9,22 +9,21 @@ load_dotenv()
 # 1. Define the Data Schema
 class CustomerData(BaseModel):
     """
-    Schema for the input features. 
-    Use Field aliases to match CSV column names with spaces.
+    Schema for input features.
     """
+    
+    model_config = ConfigDict(populate_by_name=True)
+
     age: int = Field(alias="Age")
     job: int = Field(alias="Job")
     housing: str = Field(alias="Housing")
-    saving_accounts: Optional[str] = Field("unknown", alias="Saving accounts")
-    checking_account: Optional[str] = Field("unknown", alias="Checking account")
+    saving_accounts: Optional[str] = Field(default="unknown", alias="Saving accounts")
+    checking_account: Optional[str] = Field(default="unknown", alias="Checking account")
     credit_amount: int = Field(alias="Credit amount")
     duration: int = Field(alias="Duration")
     purpose: str = Field(alias="Purpose")
     risk: str = Field(alias="Risk")
 
-    class Config:
-        # This allows the model to be populated using the field names OR the aliases
-        populate_by_name = True
 
 class RiskExplanation(BaseModel):
     """Schema for validating the LLM output."""
