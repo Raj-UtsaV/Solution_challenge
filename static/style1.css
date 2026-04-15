@@ -37,8 +37,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-    min-height: 100vh;
     font-weight: 500;
+    min-height: 100vh;
     padding: 2.5rem 1rem;
     background: var(--bg);
     color: var(--text);
@@ -78,7 +78,8 @@ body::after {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 820px;
+    max-width: 1200px;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -89,15 +90,13 @@ header {
 
 header h1 {
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 650;
 }
 
 header p {
     font-size: 15px;
     color: var(--muted);
 }
-
-/* ================= GLASS CARD ================= */
 
 .glass-card {
     background: var(--glass);
@@ -108,7 +107,6 @@ header p {
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
 
-    /* Apple-style highlight */
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         inset 0 1px rgba(255, 255, 255, 0.25);
@@ -126,8 +124,8 @@ header p {
 
 .input-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
 }
 
 .field {
@@ -139,30 +137,23 @@ header p {
 .field label {
     font-size: 12px;
     color: var(--muted);
+    font-weight: 500;
 }
 
-/* ✨ Glass inputs */
 .field input,
 .field select {
     height: 42px;
     padding: 0 14px;
     font-size: 14px;
     color: var(--text);
+    font-weight: 500;
 
     background: var(--input-bg);
     border: 1px solid var(--glass-border);
     border-radius: 10px;
 
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
     transition: all 0.2s ease;
-}
-
-/* Hover + focus like macOS */
-.field input:hover,
-.field select:hover {
-    border-color: rgba(94, 75, 219, 0.4);
 }
 
 .field input:focus,
@@ -172,7 +163,6 @@ header p {
     box-shadow: 0 0 0 3px rgba(94, 75, 219, 0.2);
 }
 
-/* ================= BUTTON ================= */
 
 .predict-btn {
     width: 100%;
@@ -186,7 +176,6 @@ header p {
     color: white;
 
     cursor: pointer;
-    transition: all 0.15s ease;
 }
 
 .predict-btn:hover {
@@ -198,20 +187,18 @@ header p {
     transform: scale(0.98);
 }
 
-/* ================= RESULTS ================= */
-
 .results-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 1.25rem;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+    margin-top: 1.5rem;
 }
 
 .result-card {
     background: var(--glass);
     border: 1px solid var(--glass-border);
     border-radius: 14px;
-    padding: 1.25rem;
+    padding: 1.4rem;
 
     backdrop-filter: blur(20px);
 }
@@ -248,28 +235,31 @@ header p {
     color: var(--muted);
 }
 
+/* LLM output */
 .output-box {
     color: var(--muted);
-    min-height: 60px;
-    display: flex;
-    align-items: center;
+    line-height: 1.6;
+    max-height: 260px;
+    overflow-y: auto;
 }
+
+
 
 .home-btn {
     text-decoration: none;
-    display: inline-block;
-
-    padding: 10px 16px;
-    border-radius: 12px;
-    border: none;
-
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
-
-    color: inherit;
-    cursor: pointer;
-
-    transition: 0.3s;
+        display: inline-block;
+    
+        padding: 10px 16px;
+        border-radius: 12px;
+        border: none;
+    
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+    
+        color: inherit;
+        cursor: pointer;
+    
+        transition: 0.3s;
 }
 
 .home-btn:hover {
@@ -278,10 +268,19 @@ header p {
 
 }
 
-/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+    .input-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+}
 
 @media (max-width: 520px) {
-    .results-container {
+    .input-grid {
         grid-template-columns: 1fr;
     }
 

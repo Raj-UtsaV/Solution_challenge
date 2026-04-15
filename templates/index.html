@@ -1,119 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk Analysis App</title>
+
+    <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
+    <div class="home-btn-container">
+        <a href="/" class="home-btn">⬅ Home</a>
+    </div>
+
     <div class="container">
+
+        <!-- HEADER -->
         <header>
             <h1>Risk Prediction System</h1>
-            <p>Fill in the details to evaluate credit risk</p>
         </header>
 
-        <form id="riskForm">
-            <div class="input-grid">
-                <div class="field">
-                    <label>Age</label>
-                    <input type="number" name="Age" placeholder="e.g. 25" required>
+        <div class="glass-card">
+
+            <!-- FORM -->
+            <form id="riskForm">
+                <p class="section-label">Applicant information</p>
+
+                <div class="input-grid">
+
+                    <div class="field">
+                        <label>Age (Must be ≥ 18)</label>
+                        <input type="number" name="Age" min="18" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Sex</label>
+                        <select name="Sex" required>
+                            <option value="" disabled selected>Select sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Job level (0–3)</label>
+                        <input type="number" name="Job" min="0" max="3" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Housing</label>
+                        <select name="Housing" required>
+                            <option value="" disabled selected>Select housing</option>
+                            <option value="own">own</option>
+                            <option value="rent">rent</option>
+                            <option value="free">free</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Saving accounts</label>
+                        <select name="Saving accounts" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="little">little</option>
+                            <option value="moderate">moderate</option>
+                            <option value="rich">rich</option>
+                            <option value="quite rich">quite rich</option>
+                            <option value="unknown">unknown</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Checking account</label>
+                        <select name="Checking account" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="little">little</option>
+                            <option value="moderate">moderate</option>
+                            <option value="rich">rich</option>
+                            <option value="unknown">unknown</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Credit amount</label>
+                        <input type="number" name="Credit amount" min="100" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Duration (months)</label>
+                        <input type="number" name="Duration" min="1" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Purpose</label>
+                        <select name="Purpose" required>
+                            <option value="" disabled selected>Select purpose</option>
+                            <option value="radio/TV">radio/TV</option>
+                            <option value="education">education</option>
+                            <option value="furniture/equipment">furniture/equipment</option>
+                            <option value="car">car</option>
+                            <option value="business">business</option>
+                            <option value="domestic appliances">domestic appliances</option>
+                            <option value="repairs">repairs</option>
+                            <option value="vacation/others">vacation/others</option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="field">
-                    <label>Sex</label>
-                    <select name="Sex" required>
-                        <option value="" disabled selected>Select Sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
+                <div class="divider"></div>
+                <button type="submit" class="predict-btn">Analyze Risk</button>
+            </form>
+
+            <!-- RESULTS -->
+            <div class="results-container">
+
+                <!-- ML RESULT (WITH BADGE) -->
+                <div class="result-card">
+                    <h3>ML Result</h3>
+                    <div class="output-box">
+                        <span id="riskBadge" class="risk-badge neutral">
+                            Awaiting analysis...
+                        </span>
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label>Job Level (0-3)</label>
-                    <input type="number" name="Job" placeholder="0" min="0" max="3" required>
+                <!-- LLM OUTPUT -->
+                <div class="result-card">
+                    <h3>LLM Explanation</h3>
+                    <div id="llmResult" class="output-box">
+                        Awaiting analysis...
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label>Housing</label>
-                    <select name="Housing" required>
-                        <option value="" disabled selected>Select Housing</option>
-                        <option value="own">own</option>
-                        <option value="rent">rent</option>
-                        <option value="free">free</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label>Saving Accounts</label>
-                    <select name="Saving accounts" required>
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="little">little</option>
-                        <option value="moderate">moderate</option>
-                        <option value="rich">rich</option>
-                        <option value="quite rich">quite rich</option>
-                        <option value="unknown">unknown</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label>Checking Account</label>
-                    <select name="Checking account" required>
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="little">little</option>
-                        <option value="moderate">moderate</option>
-                        <option value="rich">rich</option>
-                        <option value="unknown">unknown</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label>Credit Amount</label>
-                    <input type="number" name="Credit amount" placeholder="Amount in USD/EUR" required>
-                </div>
-
-                <div class="field">
-                    <label>Duration (Months)</label>
-                    <input type="number" name="Duration" placeholder="e.g. 12" required>
-                </div>
-
-                <div class="field">
-                    <label>Purpose</label>
-                    <select name="Purpose" required>
-                        <option value="" disabled selected>Select Purpose</option>
-                        <option value="radio/TV">radio/TV</option>
-                        <option value="education">education</option>
-                        <option value="furniture/equipment">furniture/equipment</option>
-                        <option value="car">car</option>
-                        <option value="business">business</option>
-                        <option value="domestic appliances">domestic appliances</option>
-                        <option value="repairs">repairs</option>
-                        <option value="vacation/others">vacation/others</option>
-                    </select>
-                </div>
-            <button type="submit" class="predict-btn">Analyze Risk</button>
-        </form>
-
-        <div class="results-container">
-            <div class="result-card">
-                <h3>Machine Learning Result</h3>
-                <div id="mlResult" class="output-box">—</div>
             </div>
-            <div class="result-card">
-                <h3>LLM Reasoning</h3>
-                <div id="llmResult" class="output-box">—</div>
-            </div>
+
         </div>
     </div>
 
+    <!-- ✅ FIXED JS -->
     <script>
         document.getElementById('riskForm').onsubmit = async (e) => {
             e.preventDefault();
+
             const formData = new FormData(e.target);
             const rawData = Object.fromEntries(formData.entries());
-            
-            // --- DATA TRANSFORMATION FOR PYDANTIC ---
-            // Explicitly converting numeric strings to Integers before sending
+
             const formattedData = {
                 ...rawData,
                 "Age": parseInt(rawData["Age"]),
@@ -122,29 +155,46 @@
                 "Duration": parseInt(rawData["Duration"])
             };
 
-            // UI Feedback
-            document.getElementById('mlResult').innerText = "Processing...";
-            document.getElementById('llmResult').innerText = "Analyzing...";
+            const badge = document.getElementById('riskBadge');
+            const llmBox = document.getElementById('llmResult');
+
+            badge.innerText = "Processing...";
+            badge.className = "risk-badge neutral";
+            llmBox.innerText = "Analyzing...";
 
             try {
                 const response = await fetch('/predict', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formattedData)
                 });
 
                 const result = await response.json();
-                if(result.status === 'success') {
-                    document.getElementById('mlResult').innerText = result.ml_output;
-                    document.getElementById('llmResult').innerText = result.llm_output;
+
+                if (result.status === 'success') {
+
+                    // ✅ Update badge (NOT mlResult div)
+                    badge.innerText = result.ml_output;
+
+                    if (result.risk_class === 'high') {
+                        badge.className = "risk-badge high";
+                    } else {
+                        badge.className = "risk-badge low";
+                    }
+
+                    llmBox.innerText = result.llm_output;
+
                 } else {
-                    document.getElementById('mlResult').innerText = "Error";
-                    document.getElementById('llmResult').innerText = result.message;
+                    badge.innerText = "Error";
+                    llmBox.innerText = result.message;
                 }
+
             } catch (error) {
-                alert("Failed to connect to server: " + error);
+                alert("Failed to connect: " + error);
             }
         };
     </script>
+
 </body>
+
 </html>
