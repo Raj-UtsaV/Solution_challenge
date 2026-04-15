@@ -11,7 +11,6 @@
     --input-bg: rgba(255, 255, 255, 0.5);
 }
 
-/* 🌙 Dark mode */
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: #0a0a0f;
@@ -73,7 +72,6 @@ body::after {
     right: -100px;
 }
 
-/* ================= LAYOUT ================= */
 
 .container {
     position: relative;
@@ -114,7 +112,7 @@ header p {
         inset 0 1px rgba(255, 255, 255, 0.25);
 }
 
-/* ================= FORM ================= */
+
 
 .section-label {
     font-size: 11px;
@@ -212,7 +210,7 @@ header p {
     text-transform: uppercase;
 }
 
-/* 🔥 Risk Badge */
+
 .risk-badge {
     display: inline-block;
     padding: 10px 16px;
@@ -221,7 +219,7 @@ header p {
     font-size: 14px;
 }
 
-/* colors */
+
 .risk-badge.high {
     background: rgba(255, 59, 48, 0.15);
     color: #ff3b30;
@@ -237,7 +235,7 @@ header p {
     color: var(--muted);
 }
 
-/* LLM output */
+
 .output-box {
     color: var(--muted);
     line-height: 1.6;

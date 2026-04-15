@@ -17,14 +17,14 @@
 
     <div class="container">
 
-        <!-- HEADER -->
+    
         <header>
             <h1>Risk Prediction System</h1>
         </header>
 
         <div class="glass-card">
 
-            <!-- FORM -->
+            
             <form id="riskForm">
                 <p class="section-label">Applicant information</p>
 
@@ -120,12 +120,10 @@
             
                     <div class="output-box">
             
-                        <!-- ML RESULT -->
                         <span id="riskBadge" class="risk-badge neutral">
                             Awaiting analysis...
                         </span>
             
-                        <!-- LLM EXPLANATION BELOW -->
                         <div id="llmResult" style="margin-top: 12px; color: #ccc;">
                             Awaiting analysis...
                         </div>
@@ -137,7 +135,6 @@
         </div>
     </div>
 
-    <!-- ✅ FIXED JS -->
     <script>
         document.getElementById('riskForm').onsubmit = async (e) => {
             e.preventDefault();
@@ -171,7 +168,6 @@
 
                 if (result.status === 'success') {
 
-                    // ✅ Update badge (NOT mlResult div)
                     badge.innerText = result.ml_output;
 
                     if (result.risk_class === 'high') {
