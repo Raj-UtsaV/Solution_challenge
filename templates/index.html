@@ -7,7 +7,7 @@
     <title>Risk Analysis App</title>
 
     <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
 </head>
 
 <body>
@@ -113,10 +113,8 @@
                 <button type="submit" class="predict-btn">Analyze Risk</button>
             </form>
 
-            <!-- RESULTS -->
             <div class="results-container">
 
-                <!-- ML RESULT (WITH BADGE) -->
                 <div class="result-card">
                     <h3>ML Result</h3>
                     <div class="output-box">
@@ -126,12 +124,13 @@
                     </div>
                 </div>
 
-                <!-- LLM OUTPUT -->
                 <div class="result-card">
                     <h3>LLM Explanation</h3>
-                    <div id="llmResult" class="output-box">
-                        Awaiting analysis...
-                    </div>
+                    <div class="output-box">
+                        <div id="llmResult" class="risk-badge neutral">
+                            Awaiting analysis...
+                        </div>
+                    </div>          
                 </div>
 
             </div>

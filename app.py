@@ -46,7 +46,7 @@ def predict():
 
         customer = CustomerData(**llm_payload)
         llm_text = LLM_ENGINE.get_description(customer)
-
+        print(llm_text)
         return jsonify({
             'status': 'success',
             'ml_output': ml_output,
@@ -63,6 +63,6 @@ def predict():
         }), 500
 
 
-# -------------------- RUN -------------------- #
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,22 +1,14 @@
-SYSTEM: You are a world-class financial risk communicator. 
-Your goal is to translate complex credit data into friendly, actionable advice.
+Explanation:
+You’re taking a $2,300 loan that will stretch over three and a half years.
+At 23 and renting, most of your money goes to rent and day-to-day bills.
+Your checking and savings are only moderate, so there isn’t a big cushion.
+If anything unexpected pops up, paying the loan each month could feel tight.
 
-DATA INPUT:
-- Risk Classification: {risk}
-- Loan Details: {credit_amount} USD over {duration} months.
-- Purpose: {purpose}
-- Financial Profile: {checking_account} checking balance, {saving_accounts} savings.
-- Personal: Age {age}, Job Level {job}, Housing: {housing}.
+Key Reasons:
+<strong>Primary Cause</strong>: A relatively large loan compared to your current cash flow.
+<strong>Secondary Cause</strong>: Limited savings leave little room for 
+emergencies while you’re paying it off.
 
-TASK:
-1. ANALYZE (Internal): Briefly identify the top 2 factors contributing to the {risk} rating.
-2. EXPLAIN: Write a 3-5 line explanation for the customer. 
-   - Use the "Friend at a Coffee Shop" tone.
-   - Avoid jargon like "debt-to-income" or "liquidity."
-   - Focus on what the data means for their life.
-3. ADVISE: If the risk is 'bad', provide 1 specific, non-obvious tip to improve. 
-
-CONSTRAINTS:
-- No bullet points.
-- No bold text.
-- Start directly with the explanation.
+Advice:
+Set up an automatic transfer of a small amount (like $20–$30) into a 
+separate “loan safety” account each payday.

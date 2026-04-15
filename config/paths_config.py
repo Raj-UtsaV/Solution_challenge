@@ -27,4 +27,4 @@ API_KEY = os.getenv("API_KEY")
 
 # Template path
 TEMPLATE_DIR = BASE_DIR / "templates"
-PROMPT_TEMPLATE_PATH = TEMPLATE_DIR / "prompt_v1.txt"
+PROMPT_TEMPLATE_PATH = TEMPLATE_DIR / "prompt_v2.txt"
