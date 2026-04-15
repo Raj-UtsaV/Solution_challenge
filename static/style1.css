@@ -103,6 +103,8 @@ header p {
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
 
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -188,7 +190,7 @@ header p {
 }
 
 .results-container {
-    display: grid;
+    display: block;
     grid-template-columns: 1fr 2fr;
     gap: 16px;
     margin-top: 1.5rem;
@@ -199,7 +201,7 @@ header p {
     border: 1px solid var(--glass-border);
     border-radius: 14px;
     padding: 1.4rem;
-
+    width : 100%;
     backdrop-filter: blur(20px);
 }
 
@@ -241,6 +243,8 @@ header p {
     line-height: 1.6;
     max-height: 260px;
     overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
