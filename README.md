@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 # 4. Set up environment variables
 # Create a .env file in the root directory and add your API key:
-echo "OPENAI_API_KEY=your_api_key_here" > .env
+echo "API_KEY=your_api_key_here" > .env
 
 # 5. Run the Flask app
 python app.py
