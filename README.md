@@ -8,7 +8,7 @@
 
 ## 📌 About
 
-**LoanSense** is a full-stack AI web application that predicts whether a loan applicant is **High Risk** or **Low Risk** using a trained Machine Learning model. Beyond a binary prediction, it passes the result to an **LLM (Generative AI) engine** that produces a detailed, human-readable analysis of the applicant's financial profile — helping lenders understand *why* a decision was made, not just what it is.
+**KarzMitra** is a full-stack AI web application that predicts whether a loan applicant is **High Risk** or **Low Risk** using a trained Machine Learning model. Beyond a binary prediction, it passes the result to an **LLM (Generative AI) engine** that produces a detailed, human-readable analysis of the applicant's financial profile — helping lenders understand *why* a decision was made, not just what it is.
 
 Built as part of the **Google Solution Challenge 2026**, the project combines classical ML with modern Generative AI to make credit risk assessment smarter and more transparent.
 
