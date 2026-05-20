@@ -104,6 +104,8 @@ pip install -r requirements.txt
 # 4. Set up environment variables
 # Create a .env file in the root directory and add your API key:
 echo "API_KEY=your_api_key_here" > .env
+echo "BASE_URL=your_api_endpoint" > .env
+echo "LLM_MODEL=your_ai_model" > ,env
 
 # 5. Run the Flask app
 python app.py
