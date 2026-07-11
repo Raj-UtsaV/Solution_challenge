@@ -91,8 +91,8 @@ KarzMitra/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Raj-UtsaV/Solution_challenge.git
-cd Solution_challenge
+git clone https://github.com/Raj-UtsaV/KarzMitra.git
+cd KarzMitra
 
 # 2. Create and activate a virtual environment
 python -m venv venv
@@ -129,7 +129,7 @@ The app is deployed and publicly accessible:
 
 ## 👥 Contributors
 
-Built with ❤️ as part of the **Google Solution Challenge 2026**.
+Built as part of the **Google Solution Challenge 2026**.
 
 * [Utsav Raj](https://github.com/Raj-UtsaV)
 * [Aditya Bansal](https://github.com/AdityaBansal0123)
