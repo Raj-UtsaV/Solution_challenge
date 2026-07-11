@@ -40,7 +40,7 @@ Built as part of the **Google Solution Challenge 2026**, the project combines cl
 ## 📁 Folder Structure
 
 ```
-Solution_challenge/
+KarzMitra/
 │
 ├── app.py                  # Flask application entry point
 ├── __init__.py
